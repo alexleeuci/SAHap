@@ -21,11 +21,11 @@ std::string rightRead;
 read splitstring(std::string test){
     std::string chunk;
     read newRead;
-    int index;
+    int index2=0;
     for(int i=0; i<4; i++){
-        while(test[index]!='\t' && test[index]!='\n'){
-            chunk = chunk + test[index];
-            index = index + 1;
+        while(test[index2]!='\t' && index2!=test.length()){
+            chunk = chunk + test[index2];
+            index2 = index2 + 1;
         }
         if(i==0){
             std::istringstream iss (chunk);
@@ -39,7 +39,7 @@ read splitstring(std::string test){
 
         }
         if(i==3){newRead.rightRead = chunk;}
-        index = index + 1;
+        index2 = index2 + 1;
         chunk = "";
     }
     return newRead;
@@ -61,10 +61,16 @@ std::vector<std::string> readReadFile(std::string readFileName){
 	readFile.open(readFileName);
 	std::vector<read> out;
 	std::string nextLine;
+	int index = 0;
 	read newRead;
-	while(readFile >> nextLine){
+	while(! readFile.eof() ){
+		getline(readFile, nextLine);
 		newRead = splitstring(nextLine);
 		out.push_back(newRead);
+		newRead.pos=0;
+		newRead.pos2=0;
+		newRead.leftRead="";
+		newRead.rightRead="";
 	}
 	return out;
 }
