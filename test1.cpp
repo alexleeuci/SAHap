@@ -114,6 +114,7 @@ void destroyVotes(int*** votes, int x, int y, int z){
 		for(int yi = 0; yi<y; yi++){
 			delete[] votes[xi][yi];
 		}
+		delete[] votes[xi];
 	}
 }
 
