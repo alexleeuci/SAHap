@@ -76,6 +76,60 @@ std::vector<std::string> readReadFile(std::string readFileName){
 }
 
 
+float MEC(std::vector<int> sol,  std::vector<std::string> genomes ,std::vector<read> reads){
+	float out;
+	//Complete this!
+	return out;
+}
+
+float score(std::vector<int> sol,  std::vector<std::string> genomes ,std::vector<read> reads){
+	float out;
+	//Complete this!
+	return out;
+}
+
+float chanceToKeep(float scoreOfCurrent, float scoreOfNew, float temp){
+	float out;
+	//Complete this!
+	return out;
+}
+
+std::vector<int> randomSolution(int k, std::vector<int> currentSolution){
+	std::vector<int> out;
+	return out;
+}
+
+std::vector<int> makeSolution(std::string genomeFileName, std::string readFileName, int in_numiters, float in_temp, float in_minTemp, float in_decreaseFactor){
+    std::vector<std::string> myGenome;
+    std::vector<read> myRead;
+	myGenome = readGenomeFile(genomeFileName);
+    myRead = readReadFile(readFileName);
+	std::vector<int> minSolution;
+	std::vector<int> currentSolution;
+	int numiters = in_numiters;
+	float temp = in_temp;
+	float minTemp = in_minTemp;
+	float decreaseFactor = in_decreaseFactor;
+	while(temp>minTemp){
+		for(int i = 0; i<numiters; i++){
+			if(MEC(currentSolution, myGenome, myRead) < MEC(minSolution, myGenome, myRead)){
+				minSolution = currentSolution; //make sure vector assignment works like this in C!
+			}
+			std::vector<int> newSolution = randomSolution(myGenome.size(), currentSolution);
+			int scoreOfCurrent = score(currentSolution, myGenome, myRead);
+			int scoreOfNew = score(newSolution, myGenome, myRead);
+			float chanceToKeep = chanceToKeep(scoreOfCurrent, scoreOfNew, temp);
+			float randomIndex = static_cast <float> (rand()) / static_cast <float> (RAND_MAX);
+			if(chanceToKeep>randomIndex){
+				currentSolution = newSolution;
+			}
+		}
+		temp = temp * decreaseFactor;
+	}
+	return minSolution;
+}
+
+
 
 
 
