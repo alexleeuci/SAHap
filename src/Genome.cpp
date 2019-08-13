@@ -20,13 +20,15 @@ dnacnt_t Genome::get_mec() {
 }
 
 float Genome::score(float temp, dnacnt_t mec) {
-	// FIXME: Implement
-	return (float)mec;
+	float max_mec = chrom_list.size()*chrom_list[0].size();
+	float out = mec / max_mec; 
+	return out;
 }
 
 float Genome::chanceToKeepFunc(float curScore, float newScore, float temp) {
-	// FIXME: Implement
-	return newScore < curScore ? 1.0 : 0.0;
+	float p = pow(0.9,(1-(curScore - newScore)))*temp;
+	//return newScore < curScore ? 1.0 : 0.0;
+	return p;
 }
 
 void Genome::sim_ann(float temp, float minTemp, float decreaseFactor, int numiters) {
