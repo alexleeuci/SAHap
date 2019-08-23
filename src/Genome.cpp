@@ -1,5 +1,7 @@
 #include "Genome.hpp"
 
+#include <iostream>
+
 using namespace std;
 
 namespace SAHap {
@@ -27,6 +29,7 @@ float Genome::score(float temp, dnacnt_t mec) {
 
 float Genome::chanceToKeepFunc(float curScore, float newScore, float temp) {
 	float p = pow(0.9,(1-(curScore - newScore)))*temp;
+	std::cout << "chance to keep: " << p << "\n";
 	//return newScore < curScore ? 1.0 : 0.0;
 	return p;
 }
@@ -39,9 +42,9 @@ void Genome::sim_ann(float temp, float minTemp, float decreaseFactor, int numite
 		int random_chrom_index = rand() % chrom_list_size;
 		chrom_list[random_chrom_index].add(read_pair_list[i]);
 	}
+	for (unsigned int i = 0; i < chrom_list.size(); i++){ std::cout << chrom_list[i] << "\n\n\n\n\n";}
 	// main sim_annealing loop
 	auto currentMEC = this->get_mec();
-
 	while (temp > minTemp) {
 		for (int i = 0; i < numiters; i++) {
 			// calculate the MEC for the current chromosomes (unless we have just reverted, in which case we do not need to)
@@ -68,6 +71,7 @@ void Genome::sim_ann(float temp, float minTemp, float decreaseFactor, int numite
 				chrom_list[random_chrom_index_2].remove(to_add);
 				chrom_list[random_chrom_index].add(to_add);
 			}
+			std::cout << "new mec:" << get_mec() << "\n";
 		}
 		temp = temp * decreaseFactor;
 	}
