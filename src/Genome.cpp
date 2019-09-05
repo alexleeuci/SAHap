@@ -3,8 +3,6 @@
 
 #define SAHAP_GENOME_DEBUG 0
 
-#include <iostream>
-
 using namespace std;
 
 namespace SAHap {
@@ -29,19 +27,6 @@ dnaweight_t Genome::mec() {
 	return out;
 }
 
-<<<<<<< HEAD
-float Genome::score(float temp, dnacnt_t mec) {
-	float max_mec = chrom_list.size()*chrom_list[0].size();
-	float out = mec / max_mec; 
-	return out;
-}
-
-float Genome::chanceToKeepFunc(float curScore, float newScore, float temp) {
-	float p = pow(0.9,(1-(curScore - newScore)))*temp;
-	std::cout << "chance to keep: " << p << "\n";
-	//return newScore < curScore ? 1.0 : 0.0;
-	return p;
-=======
 float Genome::score(dnaweight_t mec) {
 	float maxMec = this->chromosomes.size() * this->chromosomes[0].size();
 	return mec / maxMec;
@@ -49,7 +34,6 @@ float Genome::score(dnaweight_t mec) {
 
 float Genome::score() {
 	return this->score(this->mec());
->>>>>>> 79012d0b0b8fcd1e5e5b7ccdbe27210a9bbb010d
 }
 
 void Genome::shuffle() {
@@ -213,11 +197,6 @@ float Genome::findPbad(float temperature) {
 		this->iteration();
 		// cout << "[simann] temp=" << this->t << ", mec=" << this->mec() << endl;
 	}
-<<<<<<< HEAD
-	for (unsigned int i = 0; i < chrom_list.size(); i++){ std::cout << chrom_list[i] << "\n\n\n\n\n";}
-	// main sim_annealing loop
-	auto currentMEC = this->get_mec();
-=======
 
 	return this->pbad.getAverage();
 }
@@ -268,8 +247,6 @@ void Genome::optimize(float temp, float minTemp, float decreaseFactor, int numit
 	auto ploidy = this->chromosomes.size();
 	// main sim_annealing loop
 	auto currentMEC = this->mec();
-
->>>>>>> 79012d0b0b8fcd1e5e5b7ccdbe27210a9bbb010d
 	while (temp > minTemp) {
 		for (int i = 0; i < numiters; i++) {
 			// calculate the MEC for the current chromosomes (unless we have just reverted, in which case we do not need to)
@@ -296,12 +273,7 @@ void Genome::optimize(float temp, float minTemp, float decreaseFactor, int numit
 				chromosomes[moveTo].remove(rp);
 				chromosomes[moveFrom].add(rp);
 			}
-<<<<<<< HEAD
-			std::cout << "new mec:" << get_mec() << "\n";
-=======
-
 			cout << "[simann] temp=" << temp << ", mec=" << newMEC << endl;
->>>>>>> 79012d0b0b8fcd1e5e5b7ccdbe27210a9bbb010d
 		}
 		temp = temp * decreaseFactor;
 	}
