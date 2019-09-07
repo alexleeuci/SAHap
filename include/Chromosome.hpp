@@ -30,6 +30,7 @@ public:
 	 * Compute the MEC
 	 */
 	float mec();
+	float mecCheck();
 
 	/**
 	 * Add a Read to a chromosome
@@ -56,6 +57,8 @@ public:
 
 	friend ostream & operator << (ostream& stream, Chromosome& ch);
 
+	unordered_set<Read *> reads;
+
 protected:
 	struct VoteInfo {
 		dnacnt_t ref_c = 0;
@@ -72,7 +75,6 @@ protected:
 	vector<array<dnacnt_t, 2>> weights;
 
 	float imec; // cached MEC
-	unordered_set<Read *> reads;
 
 	void tally(dnapos_t site);
 	void vote(const Read& read, bool retract=false);

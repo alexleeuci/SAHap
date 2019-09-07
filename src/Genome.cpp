@@ -22,10 +22,14 @@ Genome::~Genome() {
 dnaweight_t Genome::mec() {
 	dnaweight_t out = 0;
 	for (size_t i = 0; i < chromosomes.size(); i++) {
-		out = out + chromosomes[i].mec();
+		//out = out + chromosomes[i].mec();
+		//debug        
+		out = out + chromosomes[i].mecCheck();
+		
 	}
 	return out;
 }
+
 
 float Genome::score(dnaweight_t mec) {
 	float maxMec = this->chromosomes.size() * this->chromosomes[0].size();

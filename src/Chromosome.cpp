@@ -60,6 +60,26 @@ float Chromosome::mec() {
 	return this->imec;
 }
 
+//DEBUG
+float Chromosome::mecCheck(){
+	float out = 0;
+	for(Read* const r : reads){
+		Read r_value = (*r);
+		//Read has a vector called sites
+		vector<Site> read_sites = r_value.sites;
+		//Sites is vector of struct site
+		for(Site s : read_sites){
+			//site has value, pos, and weight
+			if(this->solution[s.pos] != s.value){
+				//out = out + s.weight;				
+				out = out + 1;				
+			}
+		}
+	}
+	return out;
+}
+//
+
 void Chromosome::add(Read * r) {
 	if (this->reads.find(r) != this->reads.end()) {
 		throw "Chromosome already contains read";

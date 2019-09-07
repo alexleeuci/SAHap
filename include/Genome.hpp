@@ -19,6 +19,7 @@ public:
 	Genome(InputFile file);
 	~Genome();
 	dnaweight_t mec();
+	dnaweight_t mecCheck();
 	float score();
 	float score(dnaweight_t mec);
 

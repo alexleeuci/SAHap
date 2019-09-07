@@ -5,7 +5,7 @@ src = [
 	'InputReader.cpp',
 ]
 
-eigen_dep = dependency('eigen', fallback: ['eigen', 'eigen_dep'])
+eigen_dep = dependency('eigen', fallback: ['eigen', 'eigen_dep'], required : false)
 
 libsahap_static = static_library(
 	'sahap', src,

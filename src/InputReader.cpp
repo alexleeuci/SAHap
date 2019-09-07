@@ -34,7 +34,9 @@ void WIFInputReader::readGroundTruth(ifstream& file, InputFile& parsed) {
 	truth.reserve(parsed.ploidy);
 
 	while (!file.eof()) {
+		cout << "rgt running\n";
 		getline(file, buf);
+		cout << buf << "\n";
 		if (buf.size() == 0) continue;
 		vector<Allele> ch(parsed.index.size(), Allele::UNKNOWN);
 		for (size_t i = 0; i < buf.size(); ++i) {
